@@ -59,7 +59,7 @@ public final class Defaults {
     ///
     /// - Parameter key: The key.
     public func clear<ValueType>(_ key: Key<ValueType>) {
-        userDefaults.set(nil, forKey: key._key)
+        userDefaults.removeObject(forKey: key._key)
     }
     
     /// Checks if there is a value associated with the specified key.
@@ -67,7 +67,7 @@ public final class Defaults {
     /// - Parameter key: The key to look for.
     /// - Returns: A boolean value indicating if a value exists for the specified key.
     public func has<ValueType>(_ key: Key<ValueType>) -> Bool {
-        return userDefaults.value(forKey: key._key) != nil
+        return get(for: key) != nil
     }
     
     /// Returns the value associated with the specified key.
@@ -76,7 +76,7 @@ public final class Defaults {
     /// - Returns: A `ValueType` or nil if the key was not found.
     public func get<ValueType>(for key: Key<ValueType>) -> ValueType? {
         if isSwiftCodableType(ValueType.self) || isFoundationCodableType(ValueType.self) {
-            return userDefaults.value(forKey: key._key) as? ValueType
+            return userDefaults.object(forKey: key._key) as? ValueType
         }
         
         if ValueType.self is URL.Type {

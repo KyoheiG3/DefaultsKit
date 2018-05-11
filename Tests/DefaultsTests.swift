@@ -180,7 +180,7 @@ class DefaultsKitTests: XCTestCase {
         
         let savedValues = defaults.get(for: key)
         XCTAssertNotNil(savedValues)
-        savedValues?.forEach({ (value) in
+        values.forEach({ (value) in
             XCTAssertTrue(savedValues?.contains(value) ?? false)
         })
         
