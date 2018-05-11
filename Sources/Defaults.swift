@@ -24,11 +24,20 @@
 
 import Foundation
 
+/// Base of the Key class.
+/// It can uses like following.
+///
+/// extension DefaultsKey {
+///     static let someKey = Key<ValueType>("someKey")
+/// }
+/// Defaults.shared.set(value, for: .someKey)
+public class DefaultsKey {}
+
 /// Represents a `Key` with an associated generic value type conforming to the
 /// `Codable` protocol.
 ///
 ///     static let someKey = Key<ValueType>("someKey")
-public final class Key<ValueType: Codable> {
+public final class Key<ValueType: Codable>: DefaultsKey {
     fileprivate let _key: String
     public init(_ key: String) {
         _key = key
