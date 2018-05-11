@@ -79,6 +79,10 @@ public final class Defaults {
             return userDefaults.value(forKey: key._key) as? ValueType
         }
         
+        if ValueType.self is URL.Type {
+            return userDefaults.url(forKey: key._key) as? ValueType
+        }
+
         guard let data = userDefaults.data(forKey: key._key) else {
             return nil
         }
@@ -108,6 +112,11 @@ public final class Defaults {
             return
         }
         
+        if ValueType.self is URL.Type {
+            userDefaults.set(value as? URL, forKey: key._key)
+            return
+        }
+
         do {
             let encoder = JSONEncoder()
             let encoded = try encoder.encode(value)

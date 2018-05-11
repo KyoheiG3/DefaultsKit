@@ -147,6 +147,24 @@ class DefaultsKitTests: XCTestCase {
         
     }
     
+    func testURL() {
+
+        // Given
+        let value = URL(string: "http://example.com")!
+        let key = Key<URL>("key")
+
+        // When
+        defaults.set(value, for: key)
+
+        // Then
+        let hasKey = defaults.has(key)
+        XCTAssertTrue(hasKey)
+
+        let savedValue = defaults.get(for: key)
+        XCTAssertEqual(savedValue, value)
+
+    }
+
     func testSet() {
         
         // Given
